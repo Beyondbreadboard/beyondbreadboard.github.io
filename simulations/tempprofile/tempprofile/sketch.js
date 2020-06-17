@@ -30,6 +30,8 @@ function setup() {
   greeting.position(0, 15);
     textAlign(CENTER);
   textSize(5);
+    let a = select('iframe');
+  a.position(400,300);
   
 }
 
