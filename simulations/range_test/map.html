@@ -5,6 +5,23 @@
 <title>Google Maps - gmplot</title>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyAv9ZSZ4O9nIlAyV8i95uabV5eEFc6dfBo"></script>
 <script type="text/javascript">
+  
+
+		function distance(lat1, lon1, lat2, lon2, unit) {
+        var radlat1 = Math.PI * lat1/180
+        var radlat2 = Math.PI * lat2/180
+        var theta = lon1-lon2
+        var radtheta = Math.PI * theta/180
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        dist = Math.acos(dist)
+        dist = dist * 180/Math.PI
+        dist = dist * 60 * 1.1515
+        if (unit=="K") { dist = dist * 1.609344 }
+        if (unit=="N") { dist = dist * 0.8684 }
+        return dist
+		}
+
+
     function initialize() {
         var map = new google.maps.Map(document.getElementById("map_canvas"), {
             styles: [
@@ -4789,16 +4806,21 @@
         };
 
         map.addListener("click", function(event) {
-            var dropped_marker = new google.maps.Marker({
-                position: event.latLng,
-                icon: marker_icon_FFA500,
-                draggable: true,
-                map: map
-            });
-
-            dropped_marker.addListener('click', function() {
-                dropped_marker.setMap(null);
-            });
+		    //alert('Lat: ' + event.latLng.lat() + ' Lng: ' + event.latLng.lng());
+			var lat2 = event.latLng.lat();
+			var lon2 = event.latLng.lng();
+			var dist= distance(17.0705735,79.26204,lat2,lon2,"K");
+			alert(dist+"Km");
+//			var dropped_marker = new google.maps.Marker({
+//                position: event.latLng,
+//                icon: marker_icon_FFA500,
+//                draggable: true,
+//                map: map
+//            });
+//
+//            dropped_marker.addListener('click', function() {
+//                dropped_marker.setMap(null);
+//            });
         });
 
     }
