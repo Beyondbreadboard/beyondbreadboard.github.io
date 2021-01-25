@@ -3611,18 +3611,7 @@
             labelOrigin: new google.maps.Point(10, 11)
         };
 
-        map.addListener("click", function(event) {
-            var dropped_marker = new google.maps.Marker({
-                position: event.latLng,
-                icon: marker_icon_FFA500,
-                draggable: true,
-                map: map
-            });
 
-            dropped_marker.addListener('click', function() {
-                dropped_marker.setMap(null);
-            });
-        });
 
     }
 </script>
